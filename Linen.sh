@@ -102,13 +102,10 @@ printf '\n'
 
 #Password Keyfiles
 printf 'Files containing Password keywords:\n'
-grep --color=auto -rnw '/' -ie "PASSWORD" --color=always 2> /dev/null
+grep --color=auto -rnw '/' --exclude-dir={bin,lib\*,boot,run,sys,proc,.cargo\*,.python\*} -ie "PASSWORD" -A 2 --color=always 2> /dev/null | head -n 100
+printf 'Only 100 lines are shown\n'
 printf '\n'
 
-#Key files
-printf 'Files containing Keys Keywords:\n'
-grep --color=auto -rnw '/' -ie "keys" --color=always 2> /dev/null
-printf '\n'
 
 #SSH keys
 printf 'SSH keys:\n'
@@ -123,9 +120,9 @@ printf '\n'
 
 #Files owned
 printf 'Files owned by Me:\n'
-find / -type f -user $(whoami) 2>/dev/null | grep -v 'proc\|sys\|run'
+find /mnt /opt /media /var /etc /bin /sbin /home /usr/local/bin /usr/local/sbin /usr/bin /usr/games /usr/sbin /root /tmp -type f -user $(whoami) 2>/dev/null | grep -v 'proc\|sys\|run'
 printf '\n'
 
 printf 'Directories owned by Me:\n'
-find / -type f -user $(whoami) 2>/dev/null | grep -v 'proc\|sys\|run'
+find /mnt /opt /media /var /etc /bin /sbin /home /usr/local/bin /usr/local/sbin /usr/bin /usr/games /usr/sbin /root /tmp -type f -user $(whoami) 2>/dev/null | grep -v 'proc\|sys\|run'
 printf '\n'
