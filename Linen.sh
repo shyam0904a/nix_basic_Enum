@@ -23,8 +23,10 @@ if [[ $input == "Y" || $input == "y" ]]; then
 	sudo -l 
 fi
 
-
-
+#Groups 
+printf 'Inresting Groups\n'
+id
+printf '\n'
 #PATH-Info
 printf 'PATH INFO:\n'
 printf $PATH
@@ -42,7 +44,7 @@ printf '\n'
 
 #PROCESS INFO
 printf 'PROCESS INFO:\n'
-ps -ef | grep
+ps -ef | grep -e 'root'
 printf '\n'
 
 #CRON INFO
@@ -96,3 +98,34 @@ if [ `which xclip 2>/dev/null` ]; then
     echo "Highlighted text: "`xsel -o 2>/dev/null`
   else echo "Not found xsel and xclip"
   fi
+printf '\n'
+
+#Password Keyfiles
+printf 'Files containing Password keywords:\n'
+grep --color=auto -rnw '/' -ie "PASSWORD" --color=always 2> /dev/null
+printf '\n'
+
+#Key files
+printf 'Files containing Keys Keywords:\n'
+grep --color=auto -rnw '/' -ie "keys" --color=always 2> /dev/null
+printf '\n'
+
+#SSH keys
+printf 'SSH keys:\n'
+find / -name authorized_keys 2> /dev/null
+find / -name id_rsa 2> /dev/null
+printf '\n'
+
+#Capabilities
+printf 'Capabilites:\n'
+$(which getcap) -r  /usr/bin
+printf '\n'
+
+#Files owned
+printf 'Files owned by Me:\n'
+find / -type f -user $(whoami) 2>/dev/null | grep -v 'proc\|sys\|run'
+printf '\n'
+
+printf 'Directories owned by Me:\n'
+find / -type f -user $(whoami) 2>/dev/null | grep -v 'proc\|sys\|run'
+printf '\n'
