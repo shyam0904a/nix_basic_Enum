@@ -120,9 +120,12 @@ printf '\n'
 
 #Files owned
 printf 'Files owned by Me:\n'
-find /mnt /opt /media /var /etc /bin /sbin /home /usr/local/bin /usr/local/sbin /usr/bin /usr/games /usr/sbin /root /tmp -type f -user $(whoami) 2>/dev/null | grep -v 'proc\|sys\|run'
+find /mnt /opt /media /var /etc /bin /sbin /home /usr/local/bin /usr/local/sbin /usr/bin /usr/games /usr/sbin /root /tmp -type f -user $(whoami) 2>/dev/null | grep --color=auto -v 'proc\|sys\|run' --color=always | head -n 100
+printf 'Only 100 lines are shown\n'
 printf '\n'
 
 printf 'Directories owned by Me:\n'
-find /mnt /opt /media /var /etc /bin /sbin /home /usr/local/bin /usr/local/sbin /usr/bin /usr/games /usr/sbin /root /tmp -type f -user $(whoami) 2>/dev/null | grep -v 'proc\|sys\|run'
+find /mnt /opt /media /var /etc /bin /sbin /home /usr/local/bin /usr/local/sbin /usr/bin /usr/games /usr/sbin /root /tmp -type f -user $(whoami) 2>/dev/null | grep --color=auto -v 'proc\|sys\|run' --color=always | head -n 100
+printf 'Only 100 lines are shown\n'
+
 printf '\n'
